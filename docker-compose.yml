@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  name_classifier_app:
+    container_name: name_classifier_app_container
+    build: .
+    # command: uvicorn NameClassifier.api_router:app 
+    ports:
+    - "8000:8000"
+
