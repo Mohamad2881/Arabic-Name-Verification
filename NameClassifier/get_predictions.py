@@ -23,8 +23,8 @@ class Model():
 
 
     def classify(self, sentence:List[str]) -> List[Dict]:
-        # class_names = ['سلبي' , 'إيجابي']
         class_names = ['Fake Name' , 'Valid Name']
+        thresh=0.7
         sentence_normalized = [normalize(sent) for sent in sentence]
 
         sequence = self.tok.texts_to_sequences(sentence_normalized)
@@ -35,7 +35,9 @@ class Model():
         for idx, pred in enumerate(preds):
             row_pred = {}
             row_pred['Name'] = sentence[idx]
-            row_pred['result'] = class_names[np.round(pred[0]).astype('int')]
+            # row_pred['result'] = class_names[np.round(pred[0]).astype('int')]
+            row_pred['result'] = class_names[np.where(pred[0] > thresh, 1,0).astype('int')]
+            print(np.where(pred[0] > 0.7, 1,0))
             row_pred['score'] = float(pred[0])
 
             response.append(row_pred)
