@@ -6,7 +6,7 @@ from tkinter import filedialog
 
 window = tkinter.Tk()
 window.title("Name Verification Model")
-window.geometry('800x500')
+window.geometry('840x500')
 
 
 def get_response(end_point, name):
@@ -37,6 +37,7 @@ def insert_data(dict_):
         if k == 'score':
             v = round(v, 3)
         text.insert(tkinter.END, f'{k} = {v},  ')
+    text.insert(tkinter.END, f' \n')
 
 
 def predict_name(name=None):
@@ -82,7 +83,8 @@ def open_txt():
         
 
 def predict_default():
-    test_names = ["محمد أحمد شادى", 'باسم احمد حمادة', 'باسمم وحةد السد', 'يتيلب يابثل ثتلى' ]
+    test_names = ["محمد أحمد شادى", 'باسم احمد حمادة', 'باسمم وحةد السد',
+         'يتيلب يابثل ثتلى', 'محمد السعيد خليفة', 'مورجان أحمد مورجان', 'جزر جزر جزر', 'اسم المستخدم هنا' ]
    
     r = get_response('predict-batch', test_names)
     text.delete('1.0', tkinter.END) 
@@ -116,9 +118,8 @@ button = tkinter.Button(window, text='Verify', font=('Arial', 15), command=lambd
 button.grid(row=1, column=2, padx=10)
 
 # Output Text
-text = tkinter.Text(window, width=50, height=20, font=('Arial', 10))
+text = tkinter.Text(window, width=55, height=20, font=('Arial', 10))
 text.grid(row=1, column=3, columnspan=2, padx=10)
-
 
 # Run Default Button
 run_def_btn = tkinter.Button(window, text='Run Default', font=('Arial', 15), command=predict_default, bg=bg_color)
