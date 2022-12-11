@@ -3,7 +3,7 @@ import numpy as np
 import requests
 
 
-def main(name=None):
+def predict_name(name=None):
     
     # api endpoint for single input
     url = 'http://127.0.0.1:8000/predict'
@@ -59,7 +59,7 @@ if __name__=='__main__':
 
     args = parser.parse_args()
     if args.name:
-        main(args.name)
+        predict_name(args.name)
     else:
         predict_from_file(args.path)
 
